@@ -5,13 +5,13 @@ from datetime import datetime, timedelta
 
 
 
-PASSWORD = "npg_SBQvNT2DYA3o"   
+PASSWORD = "##########################"   
 
 DB_CONFIG = {
-    "dbname": "neondb",   
-    "user": "neondb_owner",
+    "dbname": "######",   
+    "user": "##########3",
     "password": PASSWORD,
-    "host": "ep-fragrant-lab-a86e23w7-pooler.eastus2.azure.neon.tech",
+    "host": "####################################",
     "port": "5432",
     "sslmode": "require"
 }
@@ -23,7 +23,7 @@ def get_conn():
 
 
 app = Flask(__name__)
-app.secret_key = "a1f94e3e7cbb42509d8d8c0f892b73a661bdb61a33fc9d3e29f4cf318a5c2f74"
+app.secret_key = "a1f94e3e7cbb42509d8d8***************************************88888"
 
 @app.route("/", methods =["GET"])
 def login():
@@ -120,7 +120,7 @@ def weekly_graph():
 
 
 
-    # ✅ This query sums transactions for each day of week (Sun=0 ... Sat=6)
+    # This query sums transactions for each day of week (Sun=0 ... Sat=6)
     conn = get_conn()
     try:
 
@@ -307,3 +307,4 @@ def  monthly_graph():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
+
