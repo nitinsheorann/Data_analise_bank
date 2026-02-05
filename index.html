@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyBank</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+  <!-- TOP NAVBAR (MAIN NAV) -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">S</div>
+      <div class="brand-text">
+        <span class="brand-name">SHUBHAM Bank</span>
+        <span class="brand-sub">Bank Management System · Demo Platform</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#" class="active" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('transferMoney')">Transfer Money</a>
+      <a href="/dashboard">Dashboard</a>
+      
+      
+      <a href="#" onclick="showPage('loan')">Loan</a>
+      <a href="{{ url_for('about') }}">About</a>
+    </nav>
+  </header>
+
+  <!-- MOVING INFO LINE -->
+  <div class="info-ticker">
+    <div class="info-track">
+      Welcome to SHUBHAM Bank · Secure ATM login · Instant money transfer · Simple dashboard · Demo project · Keep your credentials safe ·
+    </div>
+  </div>
+
+  <!-- ALL PAGES CONTAINER -->
+  <main id="pages">
+
+    <!-- ===================== HOME PAGE ===================== -->
+    <section
+      id="home"
+      class="page {% if active_page == 'home' or not active_page %}active{% endif %}"
+      aria-labelledby="homeTitle">
+      <!-- DETAILS BOX (MESSAGE + ACCOUNT INFO) -->
+      <section class="details-box">
+        
+
+        <!-- 1. Any error / success message -->
+        {% if message %}
+          <p class="error" role="status">{{ message }}</p>
+          <br>
+        {% endif %}
+
+        <!-- 2, 3, 4. Status + Name + Account Number -->
+        {% if username %}
+  <!-- <p>{{ message }}</p> -->
+  <p><strong>Name: </strong>{{ username }}</p>
+  <p><strong>Mobile: </strong>{{ mobile }}</p>
+  <p><strong>Atm No: </strong></p>
+{% endif %}
+      </section>
+
+      <!-- OPTIONS: CHECK BALANCE / UPDATE / DELETE -->
+      <section class="options-row">
+        <div class="opt-card">
+          <h3>Check Balance</h3>
+          <form action="/checkbalance" method="POST">
+          <p>View your current available balance in your SHUBHAM Bank account.</p>
+          <button class="opt-btn">Check Balance</button>
+          </form>
+          
+
+        </div>
+
+        <div class="opt-card">
+          <h3>Update Information</h3>
+          <p>Update your contact details or change your login password.</p>
+          <button class="opt-btn">Update Info</button>
+        </div>
+
+        <div class="opt-card">
+          <h3>Delete Account</h3>
+          <p>Request to close this demo account from the system.</p>
+          <button class="opt-btn delete">Delete Account</button>
+        </div>
+      </section>
+
+      <!-- YOUR EMIs + TRANSACTION GRAPH -->
+      <section class="emi-section">
+        <div class="emi-header">
+          <h2>Your EMIs</h2>
+          <p>Track your active EMIs and recent repayment activity.</p>
+        </div>
+
+        <div class="emi-grid">
+          <!-- EMI DETAILS CARD -->
+          <div class="emi-card">
+            <h3>EMI Summary</h3>
+            <div class="emi-details">
+              <p><span>Loan Type</span><strong>Personal Loan</strong></p>
+              <p><span>Total Loan Amount</span><strong>₹ 1,50,000</strong></p>
+              <p><span>Monthly EMI</span><strong>₹ 5,000</strong></p>
+              <p><span>Tenure</span><strong>36 months</strong></p>
+              <p><span>Next Due Date</span><strong>10 Dec 2025</strong></p>
+              <p><span>Status</span><strong class="emi-status">Active</strong></p>
+            </div>
+          </div>
+
+        
+        <div class="graph-card">
+          <h3>Transaction Graph</h3>
+          <p class="graph-caption">Your weekly spending analysis (last 7 days)</p>
+
+          <!-- ✅ Real graph from Flask route -->
+          <div class="graph-box">
+            <img src="/weekly-graph" class="graph-img" alt="Weekly Transaction Graph" />
+          </div>
+
+          <div class="graph-legend">
+            <span class="dot credit"></span><span>Weekly Spend</span>
+          </div>
+          </div>
+
+      </section>
+
+      <!-- BOTTOM SOCIAL / APP SECTION -->
+      <section class="footer-panel">
+        <!-- LEFT: APP -->
+        <div>
+          <h4>Install Mobile App</h4>
+          <div class="app-buttons">
+            <div class="app-btn">
+              <span>Download on the</span>
+              <strong>App Store</strong>
+            </div>
+            <div class="app-btn">
+              <span>GET IT ON</span>
+              <strong>Google Play</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- MIDDLE: SOCIAL -->
+        <div>
+          <h4>Get Social</h4>
+          <div class="social-icons">
+            <div class="social-circle">f</div>
+            <div class="social-circle">in</div>
+            <div class="social-circle">X</div>
+            <div class="social-circle">📷</div>
+            <div class="social-circle">▶</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: REGISTERED -->
+        <div class="reg-box">
+          <h4>SHUBHAM Bank is registered with</h4>
+          <div class="reg-logos">
+            <div class="reg-logo">DICGC</div>
+            <div class="reg-logo">QR</div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ===================== TRANSFER MONEY PAGE ===================== -->
+    <section
+      id="transferMoney"
+      class="page {% if active_page == 'transferMoney' %}active{% endif %}"
+      aria-labelledby="transTitle"
+    >
+      <h2 id="transTitle">Transfer Money</h2>
+
+      {% if transfer_error %}
+        <div class="error" role="alert">{{ transfer_error }}</div>
+      {% endif %}
+
+      <form id="transfermoney" action="/transfermoney" method="POST" >
+        <label for="atmNo">ATM No</label>
+        <input id="atmNo" name="tratmno" type="text" autocomplete="off"  />
+        <div id="atmNoErr" class="error" aria-live="polite"></div>
+
+        <label for="trAmount">Amount</label>
+        <input id="trAmount" name="tramount" type="number" min="1"  />
+        <div id="trAmountErr" class="error" aria-live="polite"></div>
+
+        <label for="trPassword">Password</label>
+        <input id="trPassword" name="trPassword" type="password" inputmode="numeric" />
+        <div id="trPasswordErr" class="error" aria-live="polite"></div>
+
+        <button type="submit" class="btn-primary">Send Money</button>
+      </form>
+
+    </section>
+
+    <!-- (Optional) Empty LOAN page placeholder so showPage('loan') doesn’t break -->
+    <section id="loan" class="page {% if active_page == 'loan' %}active{% endif %}">
+      <h2>Loan Services</h2>
+      <p>Loan page coming soon...</p>
+    </section>
+
+
+<section
+  id="analysis"
+  class="page {% if active_page == 'monthly-graph' %}active{% endif %}"
+>
+<p class="graph-caption">Your weekly spending analysis (last 7 days)</p>
+
+  <h2 id="transTitle">Data Analysis</h2>
+
+  <div >
+    <img src="/monthly-graph"  alt="Monthly Transaction Graph" />
+  </div>
+
+  <div class="graph-legend">
+    <span class="dot credit"></span><span>Monthly Spend</span>
+  </div>
+</section>
+
+
+
+
+
+  </main>
+
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  
+</body>
+</html>
