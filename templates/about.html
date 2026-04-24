@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – SHUBHAM Bank Management System</title>
+
+  <!-- Optional: Google Font (looks more premium) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles3.css') }}">
+
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">S</div>
+      <div class="brand-text">
+        <span class="brand-name">SHUBHAM Bank</span>
+        <span class="brand-sub">Bank Management System · Demo Platform</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="/home">Home</a>
+       <a href="#" onclick="showPage('monthly-graph')">Dashboard</a>
+      <a href="#" class="active">About</a>
+    </nav>
+  </header>
+
+  <!-- MAIN PAGE -->
+  <main class="page">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          <span>Enterprise-style Banking Demo · Secure · Modern · Scalable</span>
+        </div>
+
+        <h1>Bank Management System for the <span>next generation</span> of digital banking.</h1>
+        <p>
+          SHUBHAM Bank Management System is a full-stack web platform that simulates
+          real-world banking flows: account creation, ATM-based login, secure transfers,
+          and live balance updates – built using Python, Flask, and PostgreSQL.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary">View Features</button>
+          <button class="btn-ghost">Architecture Overview</button>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <h2>Platform Snapshot</h2>
+        <p>A single dashboard to manage customers, balances, and secure transactions.</p>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value">10K+</div>
+            <div class="stat-label">Simulated Accounts</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Target Uptime</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">24×7</div>
+            <div class="stat-label">Digital Access</div>
+          </div>
+        </div>
+
+        <p class="hero-tagline">
+          Designed like a real banking backend: secure sessions, transactional
+          updates, and a clean separation between UI, logic, and data.
+        </p>
+      </aside>
+    </section>
+
+    <!-- CORE CAPABILITIES -->
+    <section class="section">
+      <h2 class="section-title">Core Capabilities</h2>
+      <p class="section-subtitle">
+        The system is built around the essential workflows of a retail banking platform:
+        customer onboarding, secure authentication, and safe fund transfers.
+      </p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Customer Onboarding</h3>
+          <p>
+            Create accounts with name, phone number, ATM number, and password. Input
+            validation and uniqueness checks ensure clean, consistent data in the
+            <code>bankdata</code> table.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>ATM-Based Login</h3>
+          <p>
+            Customers sign in using ATM number and password. Flask session management keeps
+            users logged in securely while protecting sensitive operations behind server-side checks.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Fund Transfer Engine</h3>
+          <p>
+            Transfers validate target accounts, check balance, and then perform atomic debit/credit
+            updates using SQL transactions – minimizing the risk of inconsistent states.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE OVERVIEW -->
+    <section class="section">
+      <h2 class="section-title">Architecture Overview</h2>
+      <p class="section-subtitle">
+        The Bank Management System follows a simple but powerful 3-layer structure:
+        Presentation, Application, and Data. This mirrors how many real-world fintech systems are designed.
+      </p>
+
+      <div class="arch-wrapper">
+        <div class="arch-columns">
+          <div class="arch-col">
+            <h3>Presentation Layer</h3>
+            <ul>
+              <li>HTML & CSS based UI with dedicated pages for Login, Home, Transfers, and Account Creation.</li>
+              <li>Clear call-to-actions and message areas for success/error feedback.</li>
+              <li>Responsive design that adapts to desktop and mobile layouts.</li>
+            </ul>
+          </div>
+
+          <div class="arch-col">
+            <h3>Application Layer (Flask)</h3>
+            <ul>
+              <li>Flask routes handle login, signup, home dashboard and money transfers.</li>
+              <li>Session stores the logged-in customer's ATM number securely.</li>
+              <li>Business rules implemented in Python: validation, balance checks, and error handling.</li>
+            </ul>
+          </div>
+
+          <div class="arch-col">
+            <h3>Data Layer (PostgreSQL)</h3>
+            <ul>
+              <li>PostgreSQL database hosted on Neon for cloud-based storage.</li>
+              <li><code>psycopg2</code> used with parameterized queries to prevent SQL injection.</li>
+              <li>Transactional updates ensure money movements are consistent and durable.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="arch-diagram">
+          <div class="arch-diagram-box">
+            <strong>Client (Browser)</strong><br />
+            HTML forms · Buttons · User actions
+          </div>
+          <div class="arch-arrow">▼</div>
+          <div class="arch-diagram-box">
+            <strong>Flask App</strong><br />
+            Routes · Session · Validation · Transfer Logic
+          </div>
+          <div class="arch-arrow">▼</div>
+          <div class="arch-diagram-box">
+            <strong>PostgreSQL (bankdata)</strong><br />
+            Customers · Balances · Account Records
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECURITY & TECH STACK -->
+    <section class="section">
+      <h2 class="section-title">Security, Reliability & Tech Stack</h2>
+      <p class="section-subtitle">
+        Even as a demo / academic project, the platform is designed with real security
+        and reliability patterns in mind.
+      </p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Security & Reliability</h3>
+          <ul class="list">
+            <li>Session-based authentication for every sensitive action.</li>
+            <li>Server-side validation of ATM number, password and transfer amounts.</li>
+            <li>Parameterized SQL queries throughout to avoid injection attacks.</li>
+            <li>Balance checks and transactional updates to prevent negative balances.</li>
+            <li>Clear, controlled error messages instead of exposing low-level errors.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Technology Stack</h3>
+          <div class="stack-badges">
+            <div class="stack-item">
+              <span class="stack-label">Backend</span>
+              <span>Python · Flask</span>
+            </div>
+            <div class="stack-item">
+              <span class="stack-label">Database</span>
+              <span>PostgreSQL (Neon)</span>
+            </div>
+            <div class="stack-item">
+              <span class="stack-label">Connector</span>
+              <span>psycopg2</span>
+            </div>
+            <div class="stack-item">
+              <span class="stack-label">Frontend</span>
+              <span>HTML · CSS</span>
+            </div>
+            <div class="stack-item">
+              <span class="stack-label">Pattern</span>
+              <span>3-layer Web App</span>
+            </div>
+            <div class="stack-item">
+              <span class="stack-label">Use Case</span>
+              <span>Banking Demo / Academic Project</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      SHUBHAM Bank Management System · Demo / Academic Project · 2025
+    </footer>
+  </main>
+</body>
+</html>

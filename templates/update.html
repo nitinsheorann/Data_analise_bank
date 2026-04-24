@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Profile</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/update_sty.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+
+<form class="form-box" action="/update-data" method="post">
+
+<h2>Update Details</h2>
+
+<div class="input-box">
+<input type="text" name="newname" placeholder=" ">
+<label>New Name</label>
+</div>
+
+<div class="input-box">
+<input type="tel" name="newphone" placeholder=" ">
+<label>New Phone Number</label>
+</div>
+
+<div class="input-box">
+<input type="password" name="newpassword" placeholder=" ">
+<label>New Password</label>
+</div>
+
+<button type="submit">Submit</button>
+
+<p class="note">All fields are optional</p>
+
+</form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ATM Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="page active" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">ATM Login</h2>
+
+      <form action="/login" method="POST" novalidate>
+        <label for="atmNo">ATM No</label>
+        <input id="atmNo" name="atmNo" type="text" required autocomplete="username" inputmode="numeric">
+
+        <label for="password">Password</label>
+        <input id="password" name="loginpassword" type="password" maxlength="6" required autocomplete="current-password" inputmode="numeric">
+         
+        <button type="submit">Login</button>
+      </form>
+       {% if message %}
+    <div class="error" role="status">{{ message }}</div>
+  {% endif %}
+      <button  class="link-btn" id="toCreateBtn" type="button">Create Account</button>
+    </div>
+
+
+
+
+
+    <!-- CREATE ACCOUNT PAGE -->
+    <div id="createPage" class="page" aria-labelledby="createTitle" aria-hidden="true">
+      <h2 id="createTitle">Create Account</h2>
+
+      <form id="accountForm" action="/createaccount" method="POST" novalidate>
+        <label for="accName">Name</label>
+        <input id="accName" name="username" type="text" required autocomplete="name">
+
+        <div id="accNameErr" class="error" aria-live="polite"></div>
+
+        <label for="accMobile">Mobile Number</label>
+        <input id="accMobile" name="phonenumber" type="tel" inputmode="numeric" required placeholder="10 digits">
+
+        <div id="accMobileErr" class="error" aria-live="polite"></div>
+
+        <label for="accPassword">Password (6 digits)</label>
+        <input id="accPassword" name="password" type="password" maxlength="6" inputmode="numeric" required>
+
+        <div id="accPasswordErr" class="error" aria-live="polite"></div>
+
+        <label for="accConfirm">Confirm Password</label>
+        <input id="accConfirm" name="checkpassword" type="password" maxlength="6" inputmode="numeric" required>
+
+        <div id="accConfirmErr" class="error" aria-live="polite"></div>
+        <button type="submit">Create Account</button>
+        
+      </form>
+      {% if message %}
+        <div class="error" role="status">{{ message }}
+        </div>
+      {% endif %}
+
+      <button class="link-btn" id="toLoginBtn" type="button">Back to Login</button>
+    </div>
+
+  </div>
+
+<script src="{{ url_for('static', filename='js/scripts2.js') }}"></script>
+</body>
+</html>

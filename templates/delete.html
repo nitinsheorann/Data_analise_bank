@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Delete Page</title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/delete_sty.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Delete Page</h2>
+
+<p>Enter your password to confirm deletion</p>
+
+<form action="/delete-account" method="post">
+
+<input type="password" name="password" placeholder="Enter Password" required>
+
+<button type="submit">Delete</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
