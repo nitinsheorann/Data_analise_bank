@@ -1,5 +1,6 @@
 import matplotlib
-# matplotlib.use("Agg")
+# Use the non-interactive Agg backend to prevent crashes on web servers
+matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 from io import BytesIO

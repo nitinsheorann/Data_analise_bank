@@ -42,7 +42,8 @@ def home():
                 return render_template(
                     "login.html",message = "Account Not Found"
                 )
-            elif loginresult[0] == int(loginpassword):
+            # Safe string comparison to avoid type mismatch or leading zero issues
+            elif str(loginresult[0]) == str(loginpassword):
                 session['atmno'] = loginatmno
                 return render_template("index.html")
             else:
@@ -158,7 +159,7 @@ def transfermoney():
      tpass = request.form.get("trPassword")
      
 #*****credintial checking*******#
-     if(atmno == tatmno):
+     if str(atmno) == str(tatmno):
          return render_template("index.html",transfer_error = "you can't transfer to yourself!",active_page="transferMoney")
      conn = get_conn()
      try:
@@ -170,8 +171,8 @@ def transfermoney():
             
             cur.execute("select pass from bankdata where atmno = %s",(atmno,))
             chpass = cur.fetchone()
-            if chpass[0] != int(tpass):
-                return render_template("index.html",transfer_error = "wronge password,please try again",active_page="transferMoney")
+            if str(chpass[0]) != str(tpass):
+                return render_template("index.html",transfer_error = "Wrong password, please try again",active_page="transferMoney")
             
              
 
@@ -187,8 +188,7 @@ def transfermoney():
             cur.execute("insert into trans(trans_atm,trans_atm2,trans_amount) values (%s,%s,%s)",(atmno,tatmno,tamount))
             conn.commit()
      
-
-            return render_template("index.html",message = "Transection sucessful!", )
+            return render_template("index.html",message = "Transaction successful!", )
      except Exception:
           conn.rollback() 
           return render_template(
@@ -317,11 +317,10 @@ def delete_account():
             cur.execute("select pass from bankdata where atmno = %s",(atmno,))
             user_pass = cur.fetchone()
 
-            
+            if not user_pass:
+                return render_template("index.html", message="Account not found")
 
-    
-
-            if(user_pass[0] == int(password)):
+            if str(user_pass[0]) == str(password):
         
          
                 cur.execute("delete from bankdata where atmno = %s" , (atmno,))
